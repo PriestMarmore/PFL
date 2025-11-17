@@ -99,3 +99,35 @@ shortPatterns [] = True
 shortPatterns [_] = True
 shortPatterns [_,_] = True
 shortPatterns _ = False
+
+-- 2.8
+propDivs :: Integer -> [Integer]
+propDivs num = init [x | x <- [1..num], num `mod` x == 0]
+
+-- 2.9
+perfects :: Integer -> [Integer]
+perfects per = [n | n <- [1..per], sum(propDivs n) == n]
+
+-- 2.10
+pyths :: Integer -> [(Integer, Integer, Integer)]
+pyths res = [(x,y,z) | x <- [1..res], y <- [1..res], z <- [1..res], x^2 + y^2 == z^2]
+
+-- 2.11
+isPrimeHelp :: Integer -> [Integer]
+isPrimeHelp num = [x | x <- [1..num], num `mod` x == 0]
+
+isPrime :: Integer -> Bool
+isPrime num = isPrimeHelp num == [1, num]
+
+-- 2.12
+    -- concat
+myconcat :: [[a]] -> [a]
+myconcat big = [element | sublist <- big, element <- sublist]
+
+    -- myreplicate
+myreplicate :: Int -> a -> [a]
+myreplicate times num = [num | _ <- [1..times]]
+
+    -- etc
+etc :: [a] -> Int -> a
+etc list pos = head [x | (x,i) <- zip list [0..], i == pos]
